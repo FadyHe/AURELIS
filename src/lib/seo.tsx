@@ -151,7 +151,7 @@ export const SEOPress: React.FC = () => {
         '@type': 'Organization',
         name: 'Maison AURELIS Scent Experience',
         url: 'https://aurelis-perfumes.com/',
-        logo: 'https://aurelis-perfumes.com/assets/logo.png',
+        logo: '/src/assets/images/aurelis_logo_emblem_1780228648713.webp',
         description: 'Ultra-premium slow distillation perfume brand designed in Grasse.',
         sameAs: [
           'https://instagram.com/aurelis_scents',
@@ -225,7 +225,7 @@ export const SEOPress: React.FC = () => {
             name: 'Maison AURELIS Scent Experience',
             logo: {
               '@type': 'ImageObject',
-              url: 'https://aurelis-perfumes.com/assets/logo.png'
+              url: '/src/assets/images/aurelis_logo_emblem_1780228648713.webp'
             }
           }
         });
