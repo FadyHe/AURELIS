@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useStore } from './stores/useStore';
 import { Navbar } from './components/layout/Navbar';
 import { MenuOverlay } from './components/layout/MenuOverlay';
@@ -27,6 +27,7 @@ import Lenis from 'lenis';
 
 export default function App() {
   const activeRoute = useStore((state) => state.activeRoute);
+  const lenisRef = useRef<Lenis | null>(null);
 
   // Initialize Lenis scroll physics in Phase 1 for luxury animation framing
   useEffect(() => {
@@ -41,6 +42,8 @@ export default function App() {
       infinite: false,
     });
 
+    lenisRef.current = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -50,8 +53,16 @@ export default function App() {
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Silky smooth scroll-to-top on route change
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { duration: 1.2 });
+    }
+  }, [activeRoute]);
 
   // Simple router resolver
   const renderActivePage = () => {

@@ -25,7 +25,7 @@ export const ProductPage: React.FC = () => {
     ? '/assets/images/aurelis_campaign_1780222997018.webp'
     : perfume.id === 'nocterra'
       ? '/assets/images/nocterra_campaign_1780223016557.webp'
-      : '/assets/images/solaire_campaign_1780223040000.webp';
+      : '/assets/images/solaire_campaign_1780223040000.png';
 
   const storyCopy = perfume.id === 'aurelis'
     ? 'Harvested at early dawn in Grasse, we condense sea-air vapor molecules through alpine limestone structures. This process traps the salty maritime micro-elements, rendering an incredibly sharp, fresh marine sillage.'
