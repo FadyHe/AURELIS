@@ -1,6 +1,6 @@
 {
-  "name": "Luxury Perfume 3D Experience",
-  "description": "An immersive, continuous 3D scrolling experience showcasing luxury fragrances with premium cinematic environmental transitions.",
+  "name": "AURELIS",
+  "description": "AURELIS Perfume, Whenever you need it - AURELIS Perfume is a fragrance that captures the essence of elegance and sophistication. With its captivating blend of floral and woody notes, it creates an irresistible aura that leaves a lasting impression. Whether you're attending a special event or simply want to feel confident and alluring, AURELIS Perfume is the perfect choice to enhance your presence and make every moment unforgettable.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
