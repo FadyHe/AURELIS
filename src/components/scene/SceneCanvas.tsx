@@ -7,6 +7,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useStore } from '../../stores/useStore';
 import { motion, AnimatePresence } from 'motion/react';
 
+// Secure relative image imports for bundler resolution
+import aurelisBottleImg from '../../assets/images/aurelis_ocean_storm_1780227730581.webp';
+import nocterraBottleImg from '../../assets/images/nocterra_glowing_forest_1780228327135.webp';
+import solaireBottleImg from '../../assets/images/solaire_noir_ultra_luxury_1780226364281.webp';
+
 interface SceneCanvasProps {
   id?: string;          // Optional forced bottle showing (e.g. for Product Screen)
   interactive?: boolean; // Kept for interface compatibility
@@ -17,7 +22,7 @@ const ACTIVE_PALETTE = {
   aurelis: {
     id: 'aurelis',
     name: 'AURELIS',
-    image: '/assets/images/aurelis_ocean_storm_1780227730581.webp',
+    image: aurelisBottleImg,
     bgGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.45)]',
     tagline: 'LIQUID ATMOSPHERIC SKY & MINERAL SEA',
@@ -26,7 +31,7 @@ const ACTIVE_PALETTE = {
   nocterra: {
     id: 'nocterra',
     name: 'NOCTERRA',
-    image: '/assets/images/nocterra_glowing_forest_1780228327135.webp',
+    image: nocterraBottleImg,
     bgGlow: 'radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.45)]',
     tagline: 'BIOLUMINESCENT WOODS & MOSS STONE',
@@ -35,7 +40,7 @@ const ACTIVE_PALETTE = {
   'solaire-noir': {
     id: 'solaire-noir',
     name: 'SOLAIRE NOIR',
-    image: '/assets/images/solaire_noir_ultra_luxury_1780226364281.webp',
+    image: solaireBottleImg,
     bgGlow: 'radial-gradient(circle, rgba(245,158,11,0.22) 0%, rgba(245,158,11,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.45)]',
     tagline: 'WARM ONYX DUNES & GOLD SEED DUST',
@@ -122,24 +127,6 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive =
 
   const activeConfig = ACTIVE_PALETTE[activeScentKey];
 
-  // 3. Real-time smooth cursor-parallax tracking state
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const container = document.getElementById('scene-canvas-container');
-      if (!container) return;
-
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to +1
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2; // -1 to +1
-      setMouse({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <div 
       id="scene-canvas-container"
@@ -151,7 +138,7 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive =
         style={{ backgroundImage: activeConfig.bgGlow }}
       />
 
-      {/* Pristine 2.5D Editorial Framing Canvas */}
+      {/* Pristine Editorial Framing Canvas */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeConfig.id}
@@ -160,19 +147,13 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive =
             opacity: 1, 
             y: 0,
             scale: 1,
-            // Premium 2.5D dynamic perspective tilt responding to viewer's mouse
-            rotateX: mouse.y * -8,
-            rotateY: mouse.x * 8,
           }}
           exit={{ opacity: 0, y: -15, scale: 0.98 }}
           transition={{
             duration: 0.8,
             ease: [0.16, 1, 0.3, 1],
-            rotateX: { type: "spring", stiffness: 80, damping: 20 },
-            rotateY: { type: "spring", stiffness: 80, damping: 20 }
           }}
-          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-          className="relative w-full h-full bg-[#0A0A0B] border border-white/[0.06] rounded-2xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.85)] flex items-center justify-center cursor-crosshair pointer-events-auto"
+          className="relative w-full h-full bg-[#0A0A0B] border border-white/[0.06] rounded-2xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.85)] flex items-center justify-center pointer-events-auto"
         >
           {/* High-fashion product campaign photograph */}
           <motion.img
