@@ -20,6 +20,7 @@ import { ProductPage } from './components/pages/ProductPage';
 import { About } from './components/pages/About';
 import { Contact } from './components/pages/Contact';
 import { Journal } from './components/pages/Journal';
+import { NotFound } from './components/pages/NotFound';
 
 // Smooth Scroll support (Lenis simulation)
 import Lenis from 'lenis';
@@ -72,8 +73,18 @@ export default function App() {
     if (activeRoute.startsWith('product-')) {
       return <ProductPage />;
     }
+    if (activeRoute === 'not-found') {
+      return <NotFound />;
+    }
     
-    // Fallback to Home
+    // Catch-all invalid routes render the beautiful 404 block for seamless UX
+    const validRoutes = ['home', 'collection', 'about', 'contact', 'journal', 'not-found'];
+    const isProduct = activeRoute.startsWith('product-');
+    const isBlog = activeRoute.startsWith('blog-');
+    if (!validRoutes.includes(activeRoute) && !isProduct && !isBlog) {
+      return <NotFound />;
+    }
+    
     return <Home />;
   };
 

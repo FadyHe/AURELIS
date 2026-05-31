@@ -53,9 +53,9 @@ export const About: React.FC = () => {
           <span className="font-mono text-[9px] tracking-[0.3em] text-[#D4AF37] uppercase flex items-center justify-center gap-1.5">
             <HelpCircle className="w-3.5 h-3.5 text-[#D4AF37]" /> PHILOSOPHY ARCHIVE
           </span>
-          <h2 className="font-display font-medium text-4xl md:text-5xl uppercase tracking-wider text-[#E5E3DB]">
+          <h1 className="font-display font-medium text-4xl md:text-5xl uppercase tracking-wider text-[#E5E3DB]">
             THE ART OF SLOW PERFUMERY
-          </h2>
+          </h1>
           <p className="text-gray-500 text-xs md:text-sm leading-relaxed mx-auto">
             Maison Aurelis was born of a simple friction: the speed of modern digital commerce matched against the geometric patience of organic botany. We do not manufacture; we distill epochs.
           </p>

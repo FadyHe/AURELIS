@@ -111,9 +111,9 @@ export const ProductPage: React.FC = () => {
               <span className="p-1 px-3 bg-white/5 border border-white/10 rounded-full font-mono text-[8.5px] tracking-widest text-gray-400 uppercase inline-block">
                 {perfume.scentProfile}
               </span>
-              <h2 className="font-display font-light text-5xl md:text-6xl uppercase tracking-[0.05em] text-white">
+              <h1 className="font-display font-light text-5xl md:text-6xl uppercase tracking-[0.05em] text-white">
                 {perfume.name}
-              </h2>
+              </h1>
               <p className="font-mono text-[11px] tracking-[0.25em] text-[#D4AF37] uppercase font-semibold">
                 {perfume.tagline}
               </p>

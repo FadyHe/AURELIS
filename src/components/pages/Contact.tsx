@@ -51,10 +51,10 @@ export const Contact: React.FC = () => {
           <span className="font-mono text-[9px] tracking-[0.3em] text-[#D4AF37] uppercase flex items-center gap-1.5">
             <Mail className="w-3.5 h-3.5 text-[#D4AF37]" /> CONCIERGE DESK
           </span>
-          <h2 className="font-display font-medium text-4xl uppercase tracking-wider text-[#E5E3DB] leading-tight">
+          <h1 className="font-display font-medium text-4xl uppercase tracking-wider text-[#E5E3DB] leading-tight">
             PRIVATE SCENT <br />
             <span className="text-[#D4AF37]">CONSULTATION</span>
-          </h2>
+          </h1>
           <p className="text-gray-400 text-xs md:text-sm leading-relaxed text-justify">
             Securing is just the introductory trace. To unlock the full chemistry of raw botanical extracts, Maison Aurelis offers complimentary digital or sensory salon consultations with our fragrance specialists in Grasse or Paris.
           </p>

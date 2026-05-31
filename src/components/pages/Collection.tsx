@@ -44,9 +44,9 @@ export const Collection: React.FC = () => {
           <span className="font-mono text-[9px] tracking-[0.3em] text-[#D4AF37] uppercase flex items-center gap-1.5">
             <Compass className="w-3.5 h-3.5 text-[#D4AF37]" /> ESSENCE DIRECTORY
           </span>
-          <h2 className="font-display font-medium text-4xl md:text-5xl uppercase tracking-wider text-[#E5E3DB]">
+          <h1 className="font-display font-medium text-4xl md:text-5xl uppercase tracking-wider text-[#E5E3DB]">
             THE PORTFOLIO
-          </h2>
+          </h1>
           <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
             Our curated portfolio showcases raw botanical patience. Formulated through precise cold CO2 extractions and distillation directly in Grasse, France.
           </p>

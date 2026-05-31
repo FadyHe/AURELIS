@@ -177,15 +177,27 @@ export const Home: React.FC = () => {
 
                 {/* Main Hero Header */}
                 <div className="space-y-4">
-                  <motion.h2 
-                    initial={{ opacity: 0, y: 35 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-display font-light text-6xl md:text-8xl tracking-[0.15em] text-white uppercase leading-none"
-                  >
-                    {campaign.name}
-                  </motion.h2>
+                  {index === 0 ? (
+                    <motion.h1 
+                      initial={{ opacity: 0, y: 35 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                      className="font-display font-light text-6xl md:text-8xl tracking-[0.15em] text-white uppercase leading-none"
+                    >
+                      {campaign.name}
+                    </motion.h1>
+                  ) : (
+                    <motion.h2 
+                      initial={{ opacity: 0, y: 35 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                      className="font-display font-light text-6xl md:text-8xl tracking-[0.15em] text-white uppercase leading-none"
+                    >
+                      {campaign.name}
+                    </motion.h2>
+                  )}
 
                   <motion.h3
                     initial={{ opacity: 0, y: 15 }}
