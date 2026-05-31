@@ -6,7 +6,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useStore } from '../../stores/useStore';
 import { motion, AnimatePresence } from 'motion/react';
-import { Wind, Shield, Layers3, Sparkles } from 'lucide-react';
 
 interface SceneCanvasProps {
   id?: string;          // Optional forced bottle showing (e.g. for Product Screen)
@@ -18,60 +17,100 @@ const ACTIVE_PALETTE = {
   aurelis: {
     id: 'aurelis',
     name: 'AURELIS',
-    image: '/src/assets/images/aurelis_smooth_bottle_1780223760436.png',
-    bgGlow: 'radial-gradient(circle, rgba(34,211,238,0.18) 0%, rgba(56,189,248,0.04) 50%, rgba(0,0,0,0) 100%)',
-    portalOutline: 'border-cyan-500/15',
-    sparkleColor: '#22d3ee',
-    particleClass: 'shadow-[0_0_12px_rgba(34,211,238,0.6)] bg-cyan-400',
+    image: '/src/assets/images/aurelis_ultra_luxury_1780226323004.png',
+    bgGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
+    particleColor: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.45)]',
     tagline: 'LIQUID ATMOSPHERIC SKY & MINERAL SEA',
-    indexSuffix: 'I/III',
-    plinthLine: 'rgba(34,211,238,0.2)'
+    indexSuffix: 'I/III'
   },
   nocterra: {
     id: 'nocterra',
     name: 'NOCTERRA',
-    image: '/src/assets/images/nocterra_smooth_bottle_1780223465270.png',
-    bgGlow: 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, rgba(52,211,153,0.04) 50%, rgba(0,0,0,0) 100%)',
-    portalOutline: 'border-emerald-500/15',
-    sparkleColor: '#10b981',
-    particleClass: 'shadow-[0_0_12px_rgba(16,185,129,0.6)] bg-emerald-400',
+    image: '/src/assets/images/nocterra_ultra_luxury_1780226339771.png',
+    bgGlow: 'radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.01) 60%, rgba(0,0,0,0) 100%)',
+    particleColor: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.45)]',
     tagline: 'BIOLUMINESCENT WOODS & MOSS STONE',
-    indexSuffix: 'II/III',
-    plinthLine: 'rgba(16,185,129,0.2)'
+    indexSuffix: 'II/III'
   },
   'solaire-noir': {
     id: 'solaire-noir',
     name: 'SOLAIRE NOIR',
-    image: '/src/assets/images/solaire_smooth_bottle_1780223485925.png',
-    bgGlow: 'radial-gradient(circle, rgba(249,115,22,0.18) 0%, rgba(217,119,6,0.04) 50%, rgba(0,0,0,0) 100%)',
-    portalOutline: 'border-amber-500/15',
-    sparkleColor: '#f97316',
-    particleClass: 'shadow-[0_0_12px_rgba(249,115,22,0.6)] bg-amber-500',
+    image: '/src/assets/images/solaire_noir_ultra_luxury_1780226364281.png',
+    bgGlow: 'radial-gradient(circle, rgba(245,158,11,0.22) 0%, rgba(245,158,11,0.01) 60%, rgba(0,0,0,0) 100%)',
+    particleColor: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.45)]',
     tagline: 'WARM ONYX DUNES & GOLD SEED DUST',
-    indexSuffix: 'III/III',
-    plinthLine: 'rgba(249,115,22,0.2)'
+    indexSuffix: 'III/III'
   }
 };
 
-// Static pre-computed particle specs to avoid re-render performance costs
-const AMBIENT_PARTICLES = Array.from({ length: 18 }, (_, i) => ({
-  id: i,
-  x: Math.random() * 80 + 10,  // Restrict to center viewport frame (10% to 90%)
-  y: Math.random() * 70 + 15,  // Avoid top header bleed
-  size: Math.random() * 3 + 1.2,
-  duration: Math.random() * 10 + 6,
-  delay: Math.random() * 4,
-  driftX: Math.random() * 40 - 20,
-  opacity: Math.random() * 0.45 + 0.15
-}));
+// Concentrated micro-particles that get sharper and larger ONLY near the bottle centered in the photograph
+const SceneAtmosphereParticles: React.FC<{ 
+  color: string; 
+  count?: number; 
+}> = ({ color, count = 30 }) => {
+  const particles = useMemo(() => {
+    return Array.from({ length: count }, (_, i) => {
+      const r = Math.random();
+      const leftVal = 50 + (r - 0.5) * (r < 0.65 ? 25 : 75); // 65% of particles concentrated within +/- 12.5% of center
 
-export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive = false }) => {
-  const { activePerfumeIndex, scrollProgress } = useStore();
+      const baseSize = Math.random() * 1.5 + 0.8;
+      const duration = Math.random() * 6 + 5;
+      
+      return {
+        id: i,
+        left: `${leftVal}%`,
+        startY: Math.random() * 100,
+        baseSize,
+        duration,
+        delay: Math.random() * -12,
+        driftX: (Math.random() - 0.5) * 45
+      };
+    });
+  }, [count]);
+
+  return (
+    <div className="absolute inset-0 w-full h-full z-15 pointer-events-none overflow-hidden">
+      {particles.map(p => (
+        <motion.div
+          key={p.id}
+          className={`absolute rounded-full ${color}`}
+          style={{
+            left: p.left,
+            bottom: `${p.startY}%`,
+            width: `${p.baseSize}px`,
+            height: `${p.baseSize}px`,
+          }}
+          animate={{
+            y: [-120, -550], // Drift upward gracefully
+            x: [0, p.driftX],
+            scale: [0.6, 1.25, 2.8, 1.25, 0.4],
+            opacity: [0, 0.4, 0.95, 0.4, 0],
+            filter: [
+              'blur(1.5px)', // Fuzzy, out-of-focus background air at bottom
+              'blur(0.6px)', // Starts sharpening as it approaches the focal plane
+              'blur(0px)',   // Crisp, razor-sharp bright glowing spark directly over the glass flacon
+              'blur(0.8px)', // Glides into soft focus at top foreground
+              'blur(2px)'    // Blurs away into upper atmosphere
+            ]
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            delay: p.delay,
+            ease: "linear"
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive = true }) => {
+  const { activePerfumeIndex } = useStore();
 
   // 2. Identify active config payload
   const activeScentKey = useMemo<'aurelis' | 'nocterra' | 'solaire-noir'>(() => {
     if (id) {
-       // Support normal format & alternate hyphen styles
        const formatted = id.toLowerCase().replace('_', '-');
        if (formatted === 'solairenoir') return 'solaire-noir';
        return formatted as 'aurelis' | 'nocterra' | 'solaire-noir';
@@ -83,14 +122,17 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive =
 
   const activeConfig = ACTIVE_PALETTE[activeScentKey];
 
-  // 3. Normalized real-time mouse coordinate tracking (Spring Inertia Simulation)
+  // 3. Real-time smooth cursor-parallax tracking state
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Scale coordinates from -1 to 1 representing relative offset
-      const x = (e.clientX / window.innerWidth - 0.5) * 2;
-      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      const container = document.getElementById('scene-canvas-container');
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to +1
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2; // -1 to +1
       setMouse({ x, y });
     };
 
@@ -98,190 +140,70 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({ id = '', interactive =
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // 4. Parallax Scroll Choreography Translation Coordinates
-  // Slides the bottle panel elegantly to accommodate editorial prose panels on scroll
-  const scrollOffsetX = useMemo(() => {
-    if (id) return 0; // Completely centered for Product page specs block
-
-    if (scrollProgress < 0.35) {
-      const t = scrollProgress / 0.35;
-      // Aurelis: transitions from center to left offset matching prose column width
-      return 0 * (1 - t) + (-14) * t; 
-    } else if (scrollProgress < 0.70) {
-      const t = (scrollProgress - 0.35) / 0.35;
-      // Nocterra: slides across viewport to right offset column
-      return -14 * (1 - t) + 14 * t;
-    } else {
-      const t = (scrollProgress - 0.70) / 0.30;
-      // Solaire Noir: centers beautifully for the final convergence showcase
-      return 14 * (1 - t) + 0 * t;
-    }
-  }, [id, scrollProgress]);
-
-  // Compute scale and subtle rotation shift during scrolling
-  const scrollDynamics = useMemo(() => {
-    if (id) return { scale: 1.05, rotation: 0 };
-    // Elegant slight scale pinch on active scroll regions
-    const scaleBase = 0.96;
-    const compression = Math.sin(scrollProgress * Math.PI) * 0.04;
-    return {
-      scale: scaleBase - compression,
-      rotation: Math.sin(scrollProgress * Math.PI * 2) * 5 // Subtle elegant lean
-    };
-  }, [id, scrollProgress]);
-
   return (
-    <div className="w-full h-full relative flex items-center justify-center select-none pointer-events-none overflow-hidden z-10">
-      
-      {/* FEATURE 1 — DYNAMIC BACKLIGHT GRADIENT PORTAL */}
+    <div 
+      id="scene-canvas-container"
+      className="w-full h-full relative aspect-[3/4] md:aspect-auto flex items-center justify-center select-none overflow-hidden z-10 p-2 md:p-4"
+    >
+      {/* Immersive backdrop atmosphere */}
       <div 
-        className="absolute inset-0 w-full h-full ease-out duration-1000 transition-all opacity-90 z-0"
+        className="absolute inset-[15%] rounded-full blur-[80px] opacity-30 transition-all duration-[1.5s] pointer-events-none"
         style={{ backgroundImage: activeConfig.bgGlow }}
       />
 
-      {/* Rotating fine vector atmospheric ring mimicking luxury radar dials */}
-      <div className="absolute w-[28vw] h-[28vw] max-w-[420px] rounded-full border border-white/[0.03] animate-[spin_60s_linear_infinite] z-0 opacity-60 flex items-center justify-center">
-        <div className={`w-[98%] h-[98%] rounded-full border ${activeConfig.portalOutline} border-dashed opacity-40`} />
-      </div>
-
-      {/* FEATURE 2 — ACTIVE CLUSTER EMBERS (2.5D Atmospheric Particle Drift) */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        {AMBIENT_PARTICLES.map((p) => (
-          <motion.div
-            key={p.id}
-            initial={{ 
-              x: `${p.x}vw`, 
-              y: `${p.y}vh`, 
-              scale: p.size / 3, 
-              opacity: 0 
-            }}
-            animate={{ 
-              y: [`${p.y}vh`, `${p.y - 18}vh`], 
-              x: [`${p.x}vw`, `${p.x + (p.driftX / 6)}vw`],
-              opacity: [0, p.opacity, p.opacity * 0.5, 0] 
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              delay: p.delay,
-              ease: "easeInOut"
-            }}
-            className={`absolute rounded-full pointer-events-none ${activeConfig.particleClass}`}
-            style={{
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-              filter: 'blur(0.5px)'
-            }}
-          />
-        ))}
-      </div>
-
-      {/* FEATURE 3 — CORE EDITORIAL STAGE (Houses Bottles & Mirror Reflections) */}
-      <motion.div
-        animate={{ 
-          x: `${scrollOffsetX}vw`,
-          y: mouse.y * -14 // Subtle micro parallax depth reaction
-        }}
-        transition={{ type: 'spring', stiffness: 50, damping: 18 }}
-        className="relative w-full h-full max-w-4xl flex flex-col justify-center items-center z-10 pointer-events-none"
-      >
-        
-        {/* Luxury subtle fine-grid coordinates plinth */}
-        <div 
-          className="absolute bottom-[28%] left-1/2 -translate-x-1/2 w-80 h-0.5 z-0 transition-colors duration-1000"
-          style={{ 
-            background: `linear-gradient(90deg, transparent 0%, ${activeConfig.plinthLine} 50%, transparent 100%)` 
+      {/* Pristine 2.5D Editorial Framing Canvas */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeConfig.id}
+          initial={{ opacity: 0, y: 15, scale: 0.98 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            scale: 1,
+            // Premium 2.5D dynamic perspective tilt responding to viewer's mouse
+            rotateX: mouse.y * -8,
+            rotateY: mouse.x * 8,
           }}
+          exit={{ opacity: 0, y: -15, scale: 0.98 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1],
+            rotateX: { type: "spring", stiffness: 80, damping: 20 },
+            rotateY: { type: "spring", stiffness: 80, damping: 20 }
+          }}
+          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+          className="relative w-full h-full bg-[#0A0A0B] border border-white/[0.06] rounded-2xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.85)] flex items-center justify-center cursor-crosshair pointer-events-auto"
         >
-          {/* Subtle tick marks mimicking precision coordinate dials */}
-          <div className="absolute left-[15%] w-1.5 h-1 bg-white/20 -top-0.5" />
-          <div className="absolute right-[15%] w-1.5 h-1 bg-white/20 -top-0.5" />
-          <div className="absolute left-1/2 -translate-x-1/2 w-4 h-[1px] bg-white/40 -top-[1px]" />
-        </div>
-
-        {/* Dynamic Transition Wrapper for FLACON ART */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeConfig.id}
-            initial={{ opacity: 0, scale: 0.90, y: 30, rotateY: 25 }}
-            animate={{ 
-              opacity: 1, 
-              scale: scrollDynamics.scale, 
-              y: mouse.y * -8, // Dynamic mouse tracking vertical float
-              x: mouse.x * 12,  // Dynamic mouse tracking horizontal push
-              rotateY: mouse.x * 15, // Real-time simulated 3D Yaw Rotation
-              rotateZ: scrollDynamics.rotation + (mouse.x * -1.5) // Sleek perspective tilt
+          {/* High-fashion product campaign photograph */}
+          <motion.img
+            src={activeConfig.image}
+            alt={`Maison Aurelis High-Fashion Flacon: ${activeConfig.name}`}
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover select-none pointer-events-none"
+            animate={{
+              scale: 1.025,
             }}
-            exit={{ opacity: 0, scale: 0.90, y: -30, rotateY: -25 }}
-            transition={{ 
-              duration: 0.85, 
-              ease: [0.16, 1, 0.3, 1],
-              rotateY: { type: 'spring', stiffness: 45, damping: 15 },
-              scale: { duration: 0.6 }
-            }}
-            className="relative flex flex-col items-center select-none pointer-events-none w-72 md:w-85 lg:w-96 aspect-[3/4]"
-          >
-            {/* 1. PHOTOREALISTIC REFLEXIVE BOTTLE GLASS SHADE (Flipped & blurred under bottom mirror) */}
-            <div 
-              className="absolute top-[48%] left-1/2 -translate-x-1/2 w-[70%] h-[70%] z-0 origin-bottom select-none pointer-events-none hidden md:block"
-              style={{ transform: 'scaleY(-0.75) translateY(0%)' }}
-            >
-              <img 
-                src={activeConfig.image} 
-                alt={`${activeConfig.name} reflection shadow`}
-                className="w-full h-full object-contain filter blur-[4.5px] opacity-[0.25]"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-transparent h-full w-full" />
-            </div>
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          />
 
-            {/* 2. SPECULAR SHADOW GROUND WASH */}
-            <div 
-              className="absolute bottom-[25%] left-1/2 -translate-x-1/2 w-[76%] h-[8%] rounded-full filter blur-[20px] opacity-75 z-0 pointer-events-none"
-              style={{
-                background: `radial-gradient(ellipse, ${activeConfig.sparkleColor}22 0%, #0000 70%)`
-              }}
-            />
+          {/* Luxury vignette shadow layer inside image frame */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/25 pointer-events-none z-10" />
 
-            {/* 3. HERO GLASS MULTI-LAYERED PICTURE BODY */}
-            <div className="w-full h-full relative z-10 flex items-center justify-center filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.85)]">
-              
-              {/* Main Luxury PNG Layer */}
-              <img
-                src={activeConfig.image}
-                alt={`Maison Aurelis Flacon: ${activeConfig.name}`}
-                referrerPolicy="no-referrer"
-                className="w-full h-[85%] object-contain select-none pointer-events-none transition-transform duration-[1200ms] hover:scale-102"
-              />
+          {/* Atmospheric micro particles focused dynamically onto the central flacon region */}
+          <SceneAtmosphereParticles color={activeConfig.particleColor} />
 
-              {/* Dynamic light refraction layer gliding across glass */}
-              <motion.div 
-                animate={{
-                  backgroundPosition: [`${mouse.x * -80}px 0px`, `${mouse.x * 80}px 0px`]
-                }}
-                className="absolute inset-x-10 top-18 bottom-18 rounded-3xl mix-blend-color-dodge opacity-25 pointer-events-none z-20 transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%)',
-                  backgroundSize: '300% 100%'
-                }}
-              />
-            </div>
+          {/* Technical Sensory Data Plate Overlay */}
+          <div className="absolute bottom-5 left-5 z-20 flex flex-col gap-0.5 pointer-events-none font-mono text-[8px] tracking-[0.25em] text-[#E5E3DB] select-none">
+            <span className="text-[#D4AF37] font-semibold">MAISON ORIGINE SENSORY PORTRAIT</span>
+            <span className="text-gray-400">INDEXED MODEL N° {activeConfig.indexSuffix}</span>
+          </div>
 
-            {/* 4. PREMIUM FLOATING OVERLAYS (Integrated Editorial Info Label Plate) */}
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center bg-black/80 backdrop-blur-md border border-white/10 rounded-xl p-2.5 px-6 font-mono tracking-widest text-[8.5px] text-[#E5E3DB] shadow-2xl space-y-0.5 min-w-[210px] text-center">
-              <span className="text-[#D4AF37] text-[7.5px] uppercase tracking-[0.3em] font-semibold">
-                {activeConfig.tagline}
-              </span>
-              <div className="flex items-center gap-1.5 text-gray-400 text-[8px] justify-center">
-                <span>INDEXED MODEL N° {activeConfig.indexSuffix}</span>
-              </div>
-            </div>
-
-          </motion.div>
-        </AnimatePresence>
-
-      </motion.div>
-
+          <div className="absolute top-5 right-5 z-20 flex flex-col items-end gap-0.5 pointer-events-none font-mono text-[7px] tracking-widest text-gray-400 select-none">
+            <span>STATION // GRASSE</span>
+            <span className="text-[#D4AF37]">ORIGINE REGISTERED</span>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
