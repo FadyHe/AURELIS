@@ -13,11 +13,11 @@ import { SEOMetadata } from '../types';
  */
 export const METADATA_REGISTRY: Record<string, SEOMetadata> = {
   home: {
-    title: 'AURELIS | Continuous Immersive Olfactory 3D Journey',
-    description: 'Walk through are three surreal, continuous fragrance portals: Aurelis, Nocterra, and Solaire Noir. A high-contrast premium 3D sensory experience.',
-    keywords: ['aurelis perfume', 'luxury 3D website', 'organic fragrance', 'artisan perfumery', 'sustainable scents', '3D design web'],
-    ogImage: 'aurelis_home_og',
-    canonicalUrl: 'https://aurelis-perfumes.com/'
+    title: 'AURELIS',
+    description: 'AURELIS Perfume, Whenever you need it - AURELIS Perfume is a fragrance that captures the essence of elegance and sophistication. With its captivating blend of floral and woody notes, it creates an irresistible aura that leaves a lasting impression.',
+    keywords: ['aurelis perfume', 'luxury perfume website', 'organic fragrance', 'artisan perfumery', 'sustainable scents', 'design web'],
+    ogImage: '/assets/images/aurelis_ocean_storm_1780227730581.webp',
+    canonicalUrl: 'https://aurelis-zeta.vercel.app/'
   },
   collection: {
     title: 'The Collection Portfolio | AURELIS Scents',
