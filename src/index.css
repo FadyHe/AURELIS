@@ -1,0 +1,64 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+  
+  --color-[#D4AF37]: #D4AF37;
+  --color-luxury-charcoal: #0B0B0C;
+  --color-luxury-sand: #FBF9F4;
+}
+
+/* Base style resets */
+body {
+  background-color: #080809;
+  color: #E6E4DD;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* Premium scrollbar modeling to match luxury experience */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1C1C1E;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* Custom continuous cloud light keyframes mapping */
+@keyframes atmosphericPulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: translate(-50%, -10%) scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: translate(-45%, -15%) scale(1.1);
+  }
+}
+
+.bg-radial-gradient-bottom {
+  background: radial-gradient(circle at bottom, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+}
+
+/* Simple input override resets */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
