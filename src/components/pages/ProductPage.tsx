@@ -10,10 +10,6 @@ import { ChevronLeft, ShoppingBag, MapPin, Sparkles, Sprout, ArrowRight, Layers 
 import { motion } from 'motion/react';
 import { SceneCanvas } from '../scene/SceneCanvas';
 
-import aurelisCampaignImg from '../../assets/images/aurelis_campaign_1780222997018.webp';
-import nocterraCampaignImg from '../../assets/images/nocterra_campaign_1780223016557.webp';
-import solaireCampaignImg from '../../assets/images/solaire_campaign_1780223040000.webp';
-
 export const ProductPage: React.FC = () => {
   const { activeRoute, setActiveRoute, addToCart } = useStore();
   const [selectedSize, setSelectedSize] = useState<'50ml' | '100ml'>('100ml');
@@ -26,10 +22,10 @@ export const ProductPage: React.FC = () => {
 
   // Determine campaign visual assets
   const campaignBg = perfume.id === 'aurelis' 
-    ? aurelisCampaignImg
+    ? '/assets/images/aurelis_campaign_1780222997018.webp'
     : perfume.id === 'nocterra'
-      ? nocterraCampaignImg
-      : solaireCampaignImg;
+      ? '/assets/images/nocterra_campaign_1780223016557.webp'
+      : '/assets/images/solaire_campaign_1780223040000.webp';
 
   const storyCopy = perfume.id === 'aurelis'
     ? 'Harvested at early dawn in Grasse, we condense sea-air vapor molecules through alpine limestone structures. This process traps the salty maritime micro-elements, rendering an incredibly sharp, fresh marine sillage.'

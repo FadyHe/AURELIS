@@ -7,7 +7,6 @@ import React, { useEffect } from 'react';
 import { useStore } from '../stores/useStore';
 import { PERFUMES, BLOG_POSTS } from '../data/perfumes';
 import { SEOMetadata } from '../types';
-import logoEmblemImg from '../assets/images/aurelis_logo_emblem_1780228648713.webp';
 
 /**
  * Global SEO Config for Aurelis Brand
@@ -152,7 +151,7 @@ export const SEOPress: React.FC = () => {
         '@type': 'Organization',
         name: 'Maison AURELIS Scent Experience',
         url: 'https://aurelis-perfumes.com/',
-        logo: logoEmblemImg,
+        logo: '/assets/images/aurelis_logo_emblem_1780228648713.webp',
         description: 'Ultra-premium slow distillation perfume brand designed in Grasse.',
         sameAs: [
           'https://instagram.com/aurelis_scents',
@@ -226,7 +225,7 @@ export const SEOPress: React.FC = () => {
             name: 'Maison AURELIS Scent Experience',
             logo: {
               '@type': 'ImageObject',
-              url: logoEmblemImg
+              url: '/assets/images/aurelis_logo_emblem_1780228648713.webp'
             }
           }
         });

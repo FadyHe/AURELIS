@@ -7,11 +7,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useStore } from '../../stores/useStore';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Secure relative image imports for bundler resolution
-import aurelisBottleImg from '../../assets/images/aurelis_ocean_storm_1780227730581.webp';
-import nocterraBottleImg from '../../assets/images/nocterra_glowing_forest_1780228327135.webp';
-import solaireBottleImg from '../../assets/images/solaire_noir_ultra_luxury_1780226364281.webp';
-
 interface SceneCanvasProps {
   id?: string;          // Optional forced bottle showing (e.g. for Product Screen)
   interactive?: boolean; // Kept for interface compatibility
@@ -22,7 +17,7 @@ const ACTIVE_PALETTE = {
   aurelis: {
     id: 'aurelis',
     name: 'AURELIS',
-    image: aurelisBottleImg,
+    image: '/assets/images/aurelis_ocean_storm_1780227730581.webp',
     bgGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.45)]',
     tagline: 'LIQUID ATMOSPHERIC SKY & MINERAL SEA',
@@ -31,7 +26,7 @@ const ACTIVE_PALETTE = {
   nocterra: {
     id: 'nocterra',
     name: 'NOCTERRA',
-    image: nocterraBottleImg,
+    image: '/assets/images/nocterra_glowing_forest_1780228327135.webp',
     bgGlow: 'radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.45)]',
     tagline: 'BIOLUMINESCENT WOODS & MOSS STONE',
@@ -40,7 +35,7 @@ const ACTIVE_PALETTE = {
   'solaire-noir': {
     id: 'solaire-noir',
     name: 'SOLAIRE NOIR',
-    image: solaireBottleImg,
+    image: '/assets/images/solaire_noir_ultra_luxury_1780226364281.webp',
     bgGlow: 'radial-gradient(circle, rgba(245,158,11,0.22) 0%, rgba(245,158,11,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.45)]',
     tagline: 'WARM ONYX DUNES & GOLD SEED DUST',

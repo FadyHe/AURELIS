@@ -9,14 +9,6 @@ import { PERFUMES } from '../../data/perfumes';
 import { motion } from 'motion/react';
 import { ArrowRight, Compass, Shield, Eye, Flame, Trees, Sparkles, Wind } from 'lucide-react';
 
-// Import local assets securely for dynamic compilation
-import aurelisCampaignImg from '../../assets/images/aurelis_campaign_1780222997018.webp';
-import aurelisBottleImg from '../../assets/images/aurelis_ocean_storm_1780227730581.webp';
-import nocterraCampaignImg from '../../assets/images/nocterra_campaign_1780223016557.webp';
-import nocterraBottleImg from '../../assets/images/nocterra_glowing_forest_1780228327135.webp';
-import solaireCampaignImg from '../../assets/images/solaire_campaign_1780223040000.webp';
-import solaireBottleImg from '../../assets/images/solaire_noir_ultra_luxury_1780226364281.webp';
-
 const CAMPAIGN_SECTIONS = [
   {
     id: 'aurelis',
@@ -24,8 +16,8 @@ const CAMPAIGN_SECTIONS = [
     subTitle: 'Defy Gravity',
     tagline: 'Crystalline ocean wind meets floating white cliffs.',
     accent: '#38bdf8',
-    bgImage: aurelisCampaignImg,
-    bottleImage: aurelisBottleImg,
+    bgImage: '/assets/images/aurelis_campaign_1780222997018.webp',
+    bottleImage: '/assets/images/aurelis_ocean_storm_1780227730581.webp',
     tone: 'Cold, crystalline air and coastal sea mist. Suspended limestone pillars.',
     quote: 'An elevation of the senses beyond earthly weights.',
     ambientGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
@@ -38,8 +30,8 @@ const CAMPAIGN_SECTIONS = [
     subTitle: 'The Forest Breathes',
     tagline: 'Deep ancient midnight. Wet moss. Bioluminescent mystery.',
     accent: '#10b981',
-    bgImage: nocterraCampaignImg,
-    bottleImage: nocterraBottleImg,
+    bgImage: '/assets/images/nocterra_campaign_1780223016557.webp',
+    bottleImage: '/assets/images/nocterra_glowing_forest_1780228327135.webp',
     tone: 'Damp primeval roots growing over wet forest basalt and glowing lichen spores.',
     quote: 'A perpetual green twilight carved in stone.',
     ambientGlow: 'radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.01) 60%, rgba(0,0,0,0) 100%)',
@@ -52,8 +44,8 @@ const CAMPAIGN_SECTIONS = [
     subTitle: 'The Last Light',
     tagline: 'Smoked amber. Dark stone. Golden desert wind.',
     accent: '#f59e0b',
-    bgImage: solaireCampaignImg,
-    bottleImage: solaireBottleImg,
+    bgImage: '/assets/images/solaire_campaign_1780223040000.webp',
+    bottleImage: '/assets/images/solaire_noir_ultra_luxury_1780226364281.webp',
     tone: 'Cold obsidian dunes reacting against scorching red saffron sunsets.',
     quote: 'The thermal friction of shadow and absolute warmth.',
     ambientGlow: 'radial-gradient(circle, rgba(245,158,11,0.22) 0%, rgba(245,158,11,0.01) 60%, rgba(0,0,0,0) 100%)',
