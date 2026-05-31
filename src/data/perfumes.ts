@@ -34,7 +34,7 @@ export const PERFUMES: Perfume[] = [
     accentBg: 'bg-slate-900/60 border-cyan-500/30',
     worldTitle: 'Oceanic Fresh: The Spires of Aurelis',
     worldConcept: 'Floating oceanic limestone obelisks suspended over crystal white currents, with sea mist rising into crisp sunlight.',
-    imageUrl: '/src/assets/images/aurelis_ultra_luxury_1780226323004.png'
+    imageUrl: '/src/assets/images/aurelis_ocean_storm_1780227730581.png'
   },
   {
     id: 'nocterra',

@@ -17,7 +17,7 @@ const ACTIVE_PALETTE = {
   aurelis: {
     id: 'aurelis',
     name: 'AURELIS',
-    image: '/src/assets/images/aurelis_ultra_luxury_1780226323004.png',
+    image: '/src/assets/images/aurelis_ocean_storm_1780227730581.png',
     bgGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
     particleColor: 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.45)]',
     tagline: 'LIQUID ATMOSPHERIC SKY & MINERAL SEA',

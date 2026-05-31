@@ -17,7 +17,7 @@ const CAMPAIGN_SECTIONS = [
     tagline: 'Crystalline ocean wind meets floating white cliffs.',
     accent: '#38bdf8',
     bgImage: '/src/assets/images/aurelis_campaign_1780222997018.png',
-    bottleImage: '/src/assets/images/aurelis_ultra_luxury_1780226323004.png',
+    bottleImage: '/src/assets/images/aurelis_ocean_storm_1780227730581.png',
     tone: 'Cold, crystalline air and coastal sea mist. Suspended limestone pillars.',
     quote: 'An elevation of the senses beyond earthly weights.',
     ambientGlow: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, rgba(56,189,248,0.01) 60%, rgba(0,0,0,0) 100%)',
