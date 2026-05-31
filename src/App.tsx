@@ -11,8 +11,7 @@ import { Footer } from './components/layout/Footer';
 import { CartDrawer } from './components/ui/CartDrawer';
 import { ProductDrawer } from './components/ui/ProductDrawer';
 import { Toast } from './components/ui/Toast';
-import { PerformanceControls } from './components/ui/PerformanceControls';
-import { SEOPress, SEOMetadataInspector } from './lib/seo';
+import { SEOPress } from './lib/seo';
 
 // Pages
 import { Home } from './components/pages/Home';
@@ -99,9 +98,6 @@ export default function App() {
       {/* 5. Custom Real-time Visual Alerts */}
       <Toast />
 
-      {/* Adaptive Quality System Performance Toggle */}
-      <PerformanceControls />
-
       {/* 6. Dynamic Page Views (Controlled by Zustand Route Store) */}
       <main className="relative z-20">
         {renderActivePage()}
@@ -109,9 +105,6 @@ export default function App() {
 
       {/* 7. Structural Sitemap & Contact Registry */}
       <Footer />
-
-      {/* 8. Premium Real-Time SEO & Metadata Schema Inspector */}
-      <SEOMetadataInspector />
 
     </div>
   );

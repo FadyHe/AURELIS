@@ -151,7 +151,7 @@ export const SEOPress: React.FC = () => {
         '@type': 'Organization',
         name: 'Maison AURELIS Scent Experience',
         url: 'https://aurelis-perfumes.com/',
-        logo: '/src/assets/images/aurelis_logo_emblem_1780228648713.webp',
+        logo: '/assets/images/aurelis_logo_emblem_1780228648713.webp',
         description: 'Ultra-premium slow distillation perfume brand designed in Grasse.',
         sameAs: [
           'https://instagram.com/aurelis_scents',
@@ -225,7 +225,7 @@ export const SEOPress: React.FC = () => {
             name: 'Maison AURELIS Scent Experience',
             logo: {
               '@type': 'ImageObject',
-              url: '/src/assets/images/aurelis_logo_emblem_1780228648713.webp'
+              url: '/assets/images/aurelis_logo_emblem_1780228648713.webp'
             }
           }
         });
@@ -241,106 +241,4 @@ export const SEOPress: React.FC = () => {
   }, [activeRoute]);
 
   return null;
-};
-
-/**
- * Premium floating inspector component to trace SEO & Canonical schemas in real-time
- */
-export const SEOMetadataInspector: React.FC = () => {
-  const activeRoute = useStore((state) => state.activeRoute);
-  const [showInspector, setShowInspector] = React.useState(false);
-
-  let metadata: SEOMetadata = METADATA_REGISTRY.home;
-  if (activeRoute.startsWith('product-')) {
-    const id = activeRoute.replace('product-', '');
-    const perfume = PERFUMES.find(p => p.id === id);
-    if (perfume) {
-      metadata = {
-        title: `${perfume.name} Parfum | AURELIS`,
-        description: perfume.shortDescription,
-        keywords: [perfume.name.toLowerCase(), perfume.scentProfile.toLowerCase()],
-        ogImage: `aurelis_${perfume.id}_og`,
-        canonicalUrl: `https://aurelis-perfumes.com/perfume/${perfume.id}`
-      };
-    }
-  } else if (activeRoute.startsWith('blog-')) {
-    const slug = activeRoute.replace('blog-', '');
-    const post = BLOG_POSTS.find(p => p.slug === slug);
-    if (post) {
-      metadata = {
-        title: `${post.title} | Journal`,
-        description: post.excerpt,
-        keywords: [post.category.toLowerCase()],
-        ogImage: `aurelis_journal_${post.id}_og`,
-        canonicalUrl: `https://aurelis-perfumes.com/journal/${post.slug}`
-      };
-    }
-  } else if (METADATA_REGISTRY[activeRoute]) {
-    metadata = METADATA_REGISTRY[activeRoute];
-  }
-
-  return (
-    <div className="fixed bottom-4 left-4 z-50 font-sans">
-      <button
-        onClick={() => setShowInspector(!showInspector)}
-        className="px-3 py-1.5 bg-black/80 hover:bg-black/90 border border-white/10 text-[10px] tracking-widest text-[#E6E4DD] hover:text-[#D4AF37] rounded-full transition-all duration-300 shadow-xl flex items-center gap-1.5"
-      >
-        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-        SEO INFRASTRUCTURE
-      </button>
-
-      {showInspector && (
-        <div className="mt-2 w-80 max-h-96 overflow-y-auto bg-black/95 border border-white/10 text-white p-4 rounded-xl shadow-2xl backdrop-blur-md">
-          <div className="flex justify-between items-center border-b border-white/10 pb-2 mb-3">
-            <h4 className="text-[11px] font-semibold text-[#D4AF37] tracking-widest uppercase">Dynamic Meta Head Tracer</h4>
-            <button onClick={() => setShowInspector(false)} className="text-gray-400 hover:text-white text-xs">×</button>
-          </div>
-          
-          <div className="space-y-3.5 text-[11px] font-mono leading-relaxed text-gray-300">
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Active Route Context:</span>
-              <span className="text-[#88c0d0]">/{activeRoute}</span>
-            </div>
-            
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Browser Document Title:</span>
-              <span className="text-white italic">{metadata.title}</span>
-            </div>
-            
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Snippet Meta Description:</span>
-              <span className="text-gray-400 block pb-1 border-b border-white/5">{metadata.description}</span>
-            </div>
-
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Canonical Link Element:</span>
-              <span className="text-emerald-400">{metadata.canonicalUrl}</span>
-            </div>
-
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Open Graph Tags Injector:</span>
-              <div className="pl-2 border-l border-white/10 space-y-0.5 text-[10px] text-gray-500">
-                <p>og:title → <span className="text-gray-300">{metadata.title.substring(0,35)}...</span></p>
-                <p>og:description → <span className="text-gray-300">{metadata.description.substring(0,35)}...</span></p>
-                <p>og:image → <span className="text-gray-300">/assets/images/{metadata.ogImage}.jpg</span></p>
-              </div>
-            </div>
-
-            <div>
-              <span className="text-[#D4AF37] block mb-0.5">Schema.org Structured Linked Data:</span>
-              <div className="pl-2 border-l border-white/10 text-[10px] text-emerald-300/80">
-                <p className="font-bold">✓ Org: Maison AURELIS Scent Experience</p>
-                {activeRoute.startsWith('product-') && <p className="font-bold">✓ Product: AggregateOffer (EUR) & Reviews</p>}
-                {activeRoute.startsWith('blog-') && <p className="font-bold">✓ NewsArticle: Publisher & Author</p>}
-              </div>
-            </div>
-            
-            <div className="pt-2 border-t border-white/10 text-[10px] text-gray-500 text-center">
-              Target Lighthouse Checklist: 100/100 Perfect Performance & SEO
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
 };

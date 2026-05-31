@@ -34,7 +34,7 @@ export const PERFUMES: Perfume[] = [
     accentBg: 'bg-slate-900/60 border-cyan-500/30',
     worldTitle: 'Oceanic Fresh: The Spires of Aurelis',
     worldConcept: 'Floating oceanic limestone obelisks suspended over crystal white currents, with sea mist rising into crisp sunlight.',
-    imageUrl: '/src/assets/images/aurelis_ocean_storm_1780227730581.webp'
+    imageUrl: '/assets/images/aurelis_ocean_storm_1780227730581.webp'
   },
   {
     id: 'nocterra',
@@ -64,7 +64,7 @@ export const PERFUMES: Perfume[] = [
     accentBg: 'bg-[#091512]/80 border-emerald-500/20',
     worldTitle: 'Forest Mystic: The Roots of Nocterra',
     worldConcept: 'Deep, towering redwood trees with moss-coated hanging branches. Bioluminescent ferns glow along the damp path.',
-    imageUrl: '/src/assets/images/nocterra_glowing_forest_1780228327135.webp'
+    imageUrl: '/assets/images/nocterra_glowing_forest_1780228327135.webp'
   },
   {
     id: 'solaire-noir',
@@ -94,7 +94,7 @@ export const PERFUMES: Perfume[] = [
     accentBg: 'bg-[#150e09]/80 border-amber-500/20',
     worldTitle: 'Desert Noir: The Monoliths of Solaire Noir',
     worldConcept: 'Towering volcanic obsidian monoliths under a bleeding golden-hour sky, with warm sand dust carrying traces of rich resin.',
-    imageUrl: '/src/assets/images/solaire_noir_ultra_luxury_1780226364281.webp'
+    imageUrl: '/assets/images/solaire_noir_ultra_luxury_1780226364281.webp'
   }
 ];
 
